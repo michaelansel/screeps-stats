@@ -44,22 +44,22 @@ An example `stats.log` is included if you need ideas or want to confirm the expe
 1. `npm install express screeps-api`
 2. Generate API token: https://screeps.com/a/#!/account/auth-tokens (I used Full Access, but you can experiment with tighter permissions)
 3. Add token to `memory-watcher.js`
-4. ./run.sh
-5. crontab -e : `*/5 * * * * bash -c "cd /path/to/screeps/stats && ./run.sh"`
+4. `./run.sh`
+5. `crontab -e` : `*/5 * * * * bash -c "cd /path/to/screeps/stats && ./run.sh"`
 
 # Laptop Setup
 
-1. docker-machine start
-2. docker run --name graphite -it graphiteapp/graphite-statsd bash
-3. Modify /opt/graphite/conf/storage-{schemas,aggregation}.conf to match files in this repo
+1. `docker-machine start`
+2. `docker run --name graphite -it graphiteapp/graphite-statsd bash`
+3. Modify `/opt/graphite/conf/storage-{schemas,aggregation}.conf` to match files in this repo
 4. `docker stop graphite ; docker start graphite` (launch graphite process instead of bash)
 5. Update username in `json2graphite.js` (initial prefix for `flattenMetrics`)
 6. `./sync.sh` to make sure data gets loaded
-7. docker run --name grafana grafana/grafana
+7. `docker run --name grafana grafana/grafana`
 8. http://192.168.99.100:3000 (login admin:admin)
 9. Add Graphite data source pointing at `http://192.168.99.100` (no auth, newest version, direct)
 10. `sed -i 's/REPLACEWITHUSERNAME/username-matching-step-5/g' grafana-basic_stats.json`
-11. Import dashboard: grafana-basic_stats.json
+11. Import JSON dashboard: `grafana-basic_stats.json`
 
 # Routine/Viewing the data
 
